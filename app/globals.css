@@ -24,3 +24,82 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+@keyframes dropdownIn {
+  from {
+    opacity: 0;
+    transform: translateY(-6px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes searchBackdropIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes searchModalIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes searchClickFlash {
+  0% {
+    color: inherit;
+    text-shadow: none;
+  }
+  30% {
+    color: #2563eb;
+    text-shadow: 0 0 10px rgba(37, 99, 235, 0.45);
+  }
+  100% {
+    color: inherit;
+    text-shadow: none;
+  }
+}
+
+.animate-dropdown-in {
+  transform-origin: top left;
+  animation: dropdownIn 180ms ease-out;
+}
+
+.animate-search-backdrop {
+  animation: searchBackdropIn 200ms ease-out;
+}
+
+.animate-search-modal {
+  transform-origin: top center;
+  animation: searchModalIn 220ms ease-out;
+}
+
+.animate-search-click-flash {
+  animation: searchClickFlash 320ms ease-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-dropdown-in {
+    animation: none;
+  }
+  .animate-search-backdrop {
+    animation: none;
+  }
+  .animate-search-modal {
+    animation: none;
+  }
+  .animate-search-click-flash {
+    animation: none;
+  }
+}
