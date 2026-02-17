@@ -61,6 +61,7 @@ function Dropdown({ label, items, href }) {
 }
 
 export default function Navbar() {
+  const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
   const pathname = usePathname();
   const [searchOpen, setSearchOpen] = useState(false);
   const [query, setQuery] = useState("");
@@ -108,7 +109,7 @@ export default function Navbar() {
         {/* LEFT — LOGO */}
         <Link href="/" className="flex items-center gap-3">
           <img
-            src="/logo2.png"
+            src={`${basePath}/logo2.png`}
             alt="Logo"
             className="h-14 w-14 rounded-full object-cover"
           />

@@ -1,6 +1,10 @@
 import Link from "next/link";
 
 export default function SubtopicChaptersPage({ title, subtitle, chapters }) {
+  const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
+  const resolveImage = (path) =>
+    path && path.startsWith("/") ? `${basePath}${path}` : path;
+
   return (
     <main className="min-h-screen bg-[radial-gradient(circle_at_top,rgba(186,230,253,0.45),transparent_40%),linear-gradient(#f7fbff,#eef5fb)] pb-16">
       <section className="mx-auto max-w-7xl px-4 pt-14">
@@ -34,7 +38,7 @@ export default function SubtopicChaptersPage({ title, subtitle, chapters }) {
             >
               <div
                 className="absolute inset-0 bg-contain bg-center bg-no-repeat opacity-25"
-                style={{ backgroundImage: `url('${chapter.bgImage}')` }}
+                style={{ backgroundImage: `url('${resolveImage(chapter.bgImage)}')` }}
               />
               <div className="absolute inset-0 bg-white/60" />
               <div className="relative z-10 flex items-start justify-between gap-3">

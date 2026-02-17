@@ -1,6 +1,10 @@
 import Link from "next/link";
 
 export default function LectureCards({ eyebrow, title, subtitle, cards }) {
+  const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
+  const resolveImage = (path) =>
+    path && path.startsWith("/") ? `${basePath}${path}` : path;
+
   return (
     <section className="mt-10 rounded-2xl border border-gray-200 bg-white p-8 shadow-sm md:p-10">
       <p className="text-sm font-semibold uppercase tracking-wide text-cyan-600">{eyebrow}</p>
@@ -21,7 +25,7 @@ export default function LectureCards({ eyebrow, title, subtitle, cards }) {
             >
               <div
                 className="h-40 w-full bg-cover bg-center"
-                style={{ backgroundImage: `url('${card.image}')` }}
+                style={{ backgroundImage: `url('${resolveImage(card.image)}')` }}
               />
               <div className="space-y-2 p-4">
                 <p className="text-xs font-semibold uppercase tracking-wide text-cyan-600">

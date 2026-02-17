@@ -56,12 +56,17 @@ const newsItems: NewsItem[] = [
   { category: "News of Interest", title: "New Report: Trends in Mobile Health", href: "/news" },
 ];
 
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
+
 export default function Home() {
   return (
     <main>
       {/* HERO SECTION */}
       <section className="relative overflow-hidden">
-        <div className="absolute inset-0 bg-[url('/image1_background.png')] bg-cover bg-center" />
+        <div
+          className="absolute inset-0 bg-cover bg-center"
+          style={{ backgroundImage: `url('${basePath}/image1_background.png')` }}
+        />
         <div className="absolute inset-0 bg-white/75" />
         <div className="relative z-10 mx-auto max-w-6xl px-4 py-16">
           <div className="mx-auto max-w-5xl text-center">
@@ -70,7 +75,7 @@ export default function Home() {
                 Learning Platform of Oral and Maxillofacial Surgery
               </h1>
               <img
-                src="/logo_nobackground.png"
+                src={`${basePath}/logo_nobackground.png`}
                 alt="OMS Academy logo"
                 className="mx-auto h-auto w-[26rem] max-w-[80vw] shrink-0 object-contain sm:w-[30rem] lg:w-[36rem]"
               />
@@ -171,7 +176,10 @@ export default function Home() {
       {/* NEWS + TRAINING FEATURE */}
       <section className="relative overflow-hidden px-4 py-16">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(96,165,250,0.2),transparent_35%),radial-gradient(circle_at_80%_80%,rgba(6,182,212,0.18),transparent_35%),linear-gradient(135deg,#030712_0%,#0b173f_50%,#101a3f_100%)]" />
-        <div className="absolute inset-0 bg-[url('/image1_background.png')] bg-cover bg-center opacity-20" />
+        <div
+          className="absolute inset-0 bg-cover bg-center opacity-20"
+          style={{ backgroundImage: `url('${basePath}/image1_background.png')` }}
+        />
 
         <div className="relative mx-auto max-w-7xl">
           <div>

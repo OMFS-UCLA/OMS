@@ -13,13 +13,15 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
+
 export const metadata: Metadata = {
   title: "OMS Academy",
   description: "OMS Academy",
   icons: {
-    icon: "/logo2.png",
-    shortcut: "/logo2.png",
-    apple: "/logo2.png",
+    icon: `${basePath}/logo2.png`,
+    shortcut: `${basePath}/logo2.png`,
+    apple: `${basePath}/logo2.png`,
   },
 };
 
