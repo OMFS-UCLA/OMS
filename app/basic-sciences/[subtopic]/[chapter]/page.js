@@ -24,12 +24,32 @@ function buildDefaultDetails(subtopicTitle, chapter, nextChapter) {
     rapidMapNotes: chapter.desc,
     clinicalConnection:
       "Clinical connection: use this framework to structure oral exam reasoning and perioperative planning.",
+    pageSubtitle:
+      "Clinical frameworks for optimizing tissue healing in oral and maxillofacial surgery.",
     resources: ["Express Review PDF", "Resident Note Sheet", "Practice MCQs"],
     quickCheck: [
       "Which statement is most accurate for this topic?",
       "What is the highest-yield concept for exams?",
       "Which mechanism links this topic to OMFS care?",
     ],
+    textbookOverviewTitle: "Textbook Overview",
+    textbookOverviewHeading: `Core Concepts in ${chapter.title}`,
+    textbookOverviewPoints: [
+      {
+        title: "1. Foundational Concepts",
+        body: `Review the core framework for ${chapter.title.toLowerCase()} and identify the most testable relationships.`,
+      },
+      {
+        title: "2. Mechanisms and Patterns",
+        body: "Connect mechanisms to common exam patterns and bedside interpretation.",
+      },
+      {
+        title: "3. Clinical Integration",
+        body: "Translate mechanisms into OMFS-relevant clinical decisions and follow-up strategy.",
+      },
+    ],
+    textbookOverviewNote:
+      "Use this section to summarize key textbook points for rapid review and oral exam preparation.",
     nextTopic: nextChapter?.title || "Return to Basic Sciences",
   };
 }
@@ -169,6 +189,8 @@ const chapterOverrides = {
       "Risk stratification -> operative planning -> postoperative surveillance -> targeted intervention -> recovery optimization.",
     clinicalConnection:
       "Clinical connection: structured healing pathways reduce complications, improve patient recovery, and support predictable outcomes.",
+    pageSubtitle:
+      "Clinical frameworks for optimizing tissue healing in oral and maxillofacial surgery.",
     resources: [
       "OMFS Healing Protocol",
       "Postoperative Monitoring Checklist",
@@ -179,6 +201,24 @@ const chapterOverrides = {
       "How should perfusion and infection risk modify follow-up timing?",
       "When is early intervention preferred over watchful waiting?",
     ],
+    textbookOverviewTitle: "Textbook Overview",
+    textbookOverviewHeading: "Key Phases of Healing in OMFS",
+    textbookOverviewPoints: [
+      {
+        title: "1. Stabilization and Perfusion",
+        body: "Immediate postoperative management focuses on hemostasis, perfusion support, and edema control to protect tissue viability and maintain oxygen delivery.",
+      },
+      {
+        title: "2. Controlled Inflammation",
+        body: "A balanced immune response is essential for debris clearance and infection control; excessive inflammation increases fibrosis risk and delays tissue maturation.",
+      },
+      {
+        title: "3. Regeneration and Remodeling",
+        body: "Granulation, epithelial recovery, and collagen remodeling require surveillance for dehiscence, ischemia, and persistent infection signals.",
+      },
+    ],
+    textbookOverviewNote:
+      "Structured healing pathways improve predictability, reduce complications, and support safer postoperative recovery in OMFS.",
     nextTopic: "Return to Inflammation and Healing",
   },
 };
@@ -674,20 +714,15 @@ function HealingInOmfsLayout({
   chapterImage,
   details,
   nextHref,
-  generated,
 }) {
   const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
   const chapterItems = subtopicData.chapters.map((item) => ({
     ...item,
     slug: slugifySegment(item.title),
   }));
-  const chapterSlug = slugifySegment(chapter.title);
-  const isGrowthAdaptationsChapter =
-    subtopic === "pathology" &&
-    chapterSlug === "growth-adaptations-cellular-injury-and-cell-death";
-  const headerSubtitle = isGrowthAdaptationsChapter
-    ? "Comprehensive molecular and clinical framework for neoplastic transformation and progression."
-    : "Clinical frameworks for optimizing tissue healing in oral and maxillofacial surgery.";
+  const headerSubtitle =
+    details.pageSubtitle ||
+    "Clinical frameworks for optimizing tissue healing in oral and maxillofacial surgery.";
   const vascularFigure = `${basePath}/image1_background.png`;
   const processFigure = `${basePath}/cellbio1.png`;
 
@@ -792,66 +827,90 @@ function HealingInOmfsLayout({
             </div>
           </article>
 
-          {isGrowthAdaptationsChapter && generated?.markdown ? (
-            <article className="overflow-hidden rounded-2xl border border-slate-200 bg-white/95 shadow-sm">
-              <div className="border-b border-slate-200 bg-[linear-gradient(120deg,#eff6ff_0%,#f0fdfa_40%,#f8fafc_100%)] px-5 py-4">
-                <p className="text-sm font-semibold uppercase tracking-wide text-blue-700">
-                  Textbook Overview
-                </p>
-                <h3 className="mt-1 text-4xl font-semibold text-slate-900">
-                  Principles of Neoplasia: A Molecular and Clinical Comprehensive
-                </h3>
+          <article className="rounded-2xl border border-slate-200 bg-white/90 p-5 shadow-sm">
+            <h3 className="text-5xl font-semibold text-slate-900">
+              {details.textbookOverviewTitle || "Textbook Overview"}
+            </h3>
+            <h4 className="mt-5 border-t border-slate-200 pt-5 text-4xl font-semibold text-slate-900">
+              {details.textbookOverviewHeading || "Key Topics"}
+            </h4>
+            <div className="mt-4 grid gap-5 lg:grid-cols-[1.2fr_0.9fr]">
+              <div className="space-y-5 text-lg leading-relaxed text-slate-700">
+                {(details.textbookOverviewPoints || []).map((point) => (
+                  <div key={point.title}>
+                    <p className="text-3xl font-semibold text-slate-900">{point.title}</p>
+                    <p className="mt-1">{point.body}</p>
+                  </div>
+                ))}
               </div>
-              <div className="p-5 md:p-6">
-                <div className="prose prose-slate max-w-none prose-headings:font-semibold prose-h1:text-4xl prose-h2:text-3xl prose-h3:text-2xl prose-p:text-slate-700 prose-strong:text-slate-900 prose-li:text-slate-700 prose-table:table-auto prose-th:border prose-th:border-slate-300 prose-th:bg-slate-50 prose-th:px-3 prose-th:py-2 prose-td:border prose-td:border-slate-200 prose-td:px-3 prose-td:py-2">
-                  <ReactMarkdown>{generated.markdown}</ReactMarkdown>
-                </div>
-              </div>
-            </article>
-          ) : (
-            <article className="rounded-2xl border border-slate-200 bg-white/90 p-5 shadow-sm">
-              <h3 className="text-5xl font-semibold text-slate-900">Textbook Overview</h3>
-              <h4 className="mt-5 border-t border-slate-200 pt-5 text-4xl font-semibold text-slate-900">
-                Key Phases of Healing in OMFS
-              </h4>
-              <div className="mt-4 grid gap-5 lg:grid-cols-[1.2fr_0.9fr]">
-                <div className="space-y-5 text-lg leading-relaxed text-slate-700">
-                  <div>
-                    <p className="text-3xl font-semibold text-slate-900">1. Stabilization and Perfusion</p>
-                    <p className="mt-1">
-                      Immediate postoperative management focuses on hemostasis, perfusion support, and edema control to protect tissue viability and maintain oxygen delivery.
-                    </p>
-                  </div>
-                  <div>
-                    <p className="text-3xl font-semibold text-slate-900">2. Controlled Inflammation</p>
-                    <p className="mt-1">
-                      A balanced immune response is essential for debris clearance and infection control; excessive inflammation increases fibrosis risk and delays tissue maturation.
-                    </p>
-                  </div>
-                  <div>
-                    <p className="text-3xl font-semibold text-slate-900">3. Regeneration and Remodeling</p>
-                    <p className="mt-1">
-                      Granulation, epithelial recovery, and collagen remodeling require surveillance for dehiscence, ischemia, and persistent infection signals.
-                    </p>
-                  </div>
-                </div>
 
-                <div className="space-y-3">
-                  {[vascularFigure, processFigure, chapterImage].map((img, idx) => (
-                    <div key={`${img}-${idx}`} className="overflow-hidden rounded-xl border border-slate-200">
-                      <div className="h-32 bg-cover bg-center md:h-36" style={{ backgroundImage: `url('${img}')` }} />
-                    </div>
-                  ))}
-                </div>
+              <div className="space-y-3">
+                {[vascularFigure, processFigure, chapterImage].map((img, idx) => (
+                  <div key={`${img}-${idx}`} className="overflow-hidden rounded-xl border border-slate-200">
+                    <div className="h-32 bg-cover bg-center md:h-36" style={{ backgroundImage: `url('${img}')` }} />
+                  </div>
+                ))}
               </div>
-              <div className="mt-5 rounded-xl border border-slate-200 bg-slate-50 px-4 py-3">
-                <p className="text-lg leading-relaxed text-slate-700">
-                  ddasdasdfdfdsfsdfsfdsfasfdsfsfasfdsfsfsfsda fsa fdsa f sdf dsa fdsa f sadf dsa fsd f sadf sadf sad fsad f asdf asd fdsa f sdf sadf dsaf dsa fsad f dsf sadf sad fsad f sadfs
-                </p>
-              </div>
-            </article>
-          )}
+            </div>
+            <div className="mt-5 rounded-xl border border-slate-200 bg-slate-50 px-4 py-3">
+              <p className="text-lg leading-relaxed text-slate-700">
+                {details.textbookOverviewNote}
+              </p>
+            </div>
+          </article>
                   
+                  <article className="rounded-2xl border border-slate-200 bg-white/90 p-5 shadow-sm">
+  <h3 className="text-5xl font-semibold text-slate-900">
+    Textbook Overview 2
+  </h3>
+
+  <h4 className="mt-5 border-t border-slate-200 pt-5 text-4xl font-semibold text-slate-900">
+    Key Phases of Healing in OMFS
+  </h4>
+
+  {/* Removed grid layout since images are gone */}
+  <div className="mt-4 space-y-5 text-lg leading-relaxed text-slate-700">
+
+    <div>
+      <p className="text-3xl font-semibold text-slate-900">
+        1. Stabilization and Perfusion
+      </p>
+      <p className="mt-1">
+        Immediate postoperative management focuses on hemostasis, perfusion support,
+        and edema control to protect tissue viability and maintain oxygen delivery.
+      </p>
+    </div>
+
+    <div>
+      <p className="text-3xl font-semibold text-slate-900">
+        2. Controlled Inflammation
+      </p>
+      <p className="mt-1">
+        A balanced immune response is essential for debris clearance and infection
+        control; excessive inflammation increases fibrosis risk and delays tissue maturation.
+      </p>
+    </div>
+
+    <div>
+      <p className="text-3xl font-semibold text-slate-900">
+        3. Regeneration and Remodeling
+      </p>
+      <p className="mt-1">
+        Granulation, epithelial recovery, and collagen remodeling require surveillance
+        for dehiscence, ischemia, and persistent infection signals.
+      </p>
+    </div>
+
+  </div>
+
+  <div className="mt-5 rounded-xl border border-slate-200 bg-slate-50 px-4 py-3">
+    <p className="text-lg leading-relaxed text-slate-700">
+      ddasdasdfdfdsfsdfsfdsfasfdsfsfasfdsfsfsfsda fsa fdsa f sdf dsa fdsa f
+      sadf dsa fsd f sadf sadf sad fsad f asdf asd fdsa f sdf sadf dsaf dsa
+      fsad f dsf sadf sad fsad f sadfs
+    </p>
+  </div>
+</article>
 
           <div className="rounded-2xl border border-cyan-200 bg-gradient-to-r from-cyan-50 to-blue-50 p-5 shadow-sm">
             <p className="text-sm font-semibold uppercase tracking-wide text-cyan-700">Pearl</p>
@@ -932,8 +991,7 @@ export default async function ChapterDetailPage({ params }) {
     overrideKey === "inflammation-healing/impaired-healing";
   const isHealingTemplateChapter =
     overrideKey === "inflammation-healing/healing-in-omfs" ||
-    overrideKey === "inflammation-healing/phases-of-wound-healing" ||
-    overrideKey === "pathology/growth-adaptations-cellular-injury-and-cell-death";
+    overrideKey === "inflammation-healing/phases-of-wound-healing";
   const organelleFigure = `${basePath}/cellorganelles1.png`;
   const cytoskeletonFigure = `${basePath}/cytoskeleton1.png`;
   const ecmFigure = `${basePath}/cellbio1.png`;
@@ -984,7 +1042,6 @@ export default async function ChapterDetailPage({ params }) {
         chapterImage={chapterImage}
         details={details}
         nextHref={nextHref}
-        generated={generated}
       />
     );
   }
