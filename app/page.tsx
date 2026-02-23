@@ -21,7 +21,7 @@ const hubCards: HubCard[] = [
     desc: "Interactive lectures and tutorials",
     href: "/training",
     imageClass:
-      "bg-[radial-gradient(circle_at_20%_20%,rgba(56,189,248,0.35),transparent_40%),linear-gradient(140deg,#0b1028_0%,#1b2460_100%)]",
+      "bg-[radial-gradient(circle_at_25%_18%,rgba(56,189,248,0.45),transparent_35%),linear-gradient(155deg,#09122f_0%,#1f2f82_100%)]",
     icon: "▶️",
   },
   {
@@ -29,7 +29,7 @@ const hubCards: HubCard[] = [
     desc: "Tools, datasets, and publishing",
     href: "/resources",
     imageClass:
-      "bg-[radial-gradient(circle_at_70%_20%,rgba(59,130,246,0.45),transparent_40%),linear-gradient(140deg,#1a1d4b_0%,#2d1972_100%)]",
+      "bg-[radial-gradient(circle_at_70%_20%,rgba(192,132,252,0.45),transparent_35%),linear-gradient(155deg,#261b63_0%,#5f2ca8_100%)]",
     icon: "🧪",
   },
   {
@@ -37,7 +37,7 @@ const hubCards: HubCard[] = [
     desc: "Forums and collaboration",
     href: "/community",
     imageClass:
-      "bg-[radial-gradient(circle_at_30%_30%,rgba(14,165,233,0.35),transparent_45%),linear-gradient(140deg,#101934_0%,#1e3a8a_100%)]",
+      "bg-[radial-gradient(circle_at_30%_25%,rgba(56,189,248,0.45),transparent_35%),linear-gradient(155deg,#0f2552_0%,#1f4da5_100%)]",
     icon: "👥",
   },
   {
@@ -45,15 +45,15 @@ const hubCards: HubCard[] = [
     desc: "Latest insights and updates",
     href: "/news",
     imageClass:
-      "bg-[radial-gradient(circle_at_80%_20%,rgba(125,211,252,0.35),transparent_40%),linear-gradient(140deg,#1b2d52_0%,#315d9e_100%)]",
+      "bg-[radial-gradient(circle_at_80%_18%,rgba(125,211,252,0.45),transparent_35%),linear-gradient(155deg,#1a2757_0%,#3967b8_100%)]",
     icon: "📰",
   },
 ];
 
 const newsItems: NewsItem[] = [
-  { category: "Events", title: "Upcoming Workshop on Digital Health", href: "/news#events" },
-  { category: "Job Opportunities", title: "Assistant Professor Position – Digital Biomarkers", href: "/news#jobs" },
-  { category: "News of Interest", title: "New Report: Trends in Mobile Health", href: "/news" },
+  { category: "Events", title: "Coming Soon!", href: "/news#events" },
+  { category: "Events", title: "Coming Soon!", href: "/news#jobs" },
+  { category: "News of Interest", title: "New Report: Coming Soon!", href: "/news" },
 ];
 
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
@@ -142,13 +142,14 @@ export default function Home() {
 
       {/* HUB RESOURCES */}
       <section className="px-4 py-14">
-        <div className="mx-auto max-w-7xl overflow-hidden rounded-3xl border border-slate-700 bg-[radial-gradient(circle_at_85%_15%,rgba(148,163,184,0.25),transparent_30%),linear-gradient(135deg,#030712_0%,#070f2e_45%,#0f172a_100%)] p-8 md:p-12">
-          <h2 className="text-center text-4xl font-semibold leading-tight text-white md:text-6xl md:whitespace-nowrap">
+        <div className="mx-auto max-w-7xl overflow-hidden rounded-[2rem] border border-indigo-300/30 bg-[radial-gradient(circle_at_16%_18%,rgba(56,189,248,0.28),transparent_34%),radial-gradient(circle_at_83%_20%,rgba(244,114,182,0.26),transparent_36%),linear-gradient(145deg,#040a2e_0%,#151a54_40%,#180e3f_100%)] p-8 shadow-[0_30px_90px_-35px_rgba(59,130,246,0.8)] md:p-12">
+          <div className="mx-auto h-px max-w-6xl bg-gradient-to-r from-transparent via-blue-200/40 to-transparent" />
+          <h2 className="mt-6 text-center text-4xl font-bold leading-tight text-white md:text-6xl md:whitespace-nowrap">
             OMFS - ALL IN ONE PLACE
           </h2>
-          <p className="mx-auto mt-4 max-w-3xl text-center text-lg leading-relaxed text-slate-300 md:text-xl">
-            Discover a unified learning ecosystem for lectures, research tools,
-            collaborative community spaces, and the latest specialty updates.
+          <p className="mx-auto mt-4 max-w-3xl text-center text-lg leading-relaxed text-indigo-100 md:text-xl">
+            A unified platform for lectures, research tools, community collaboration,
+            and specialty updates.
           </p>
 
           <div className="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
@@ -156,16 +157,17 @@ export default function Home() {
               <Link
                 key={card.title}
                 href={card.href}
-                className="group overflow-hidden rounded-3xl border border-white/10 bg-slate-950/40 backdrop-blur transition-all duration-200 hover:-translate-y-1 hover:shadow-xl hover:shadow-blue-900/30"
+                className="group overflow-hidden rounded-[1.8rem] border border-blue-200/35 bg-white/5 backdrop-blur-xl transition-all duration-200 hover:-translate-y-1.5 hover:shadow-[0_20px_50px_-20px_rgba(125,211,252,0.85)]"
               >
-                <div className={`flex h-52 items-center justify-center ${card.imageClass}`}>
-                  <div className="flex h-24 w-24 items-center justify-center rounded-3xl bg-white/10 shadow-inner shadow-sky-200/20">
-                    <span className="text-6xl">{card.icon}</span>
+                <div className={`relative flex h-52 items-center justify-center border-b border-blue-200/30 ${card.imageClass}`}>
+                  <div className="absolute inset-x-0 bottom-0 h-10 bg-gradient-to-t from-fuchsia-400/25 to-transparent" />
+                  <div className="flex h-24 w-24 items-center justify-center rounded-3xl border border-white/45 bg-white/10 shadow-[inset_0_0_22px_rgba(191,219,254,0.35)]">
+                    <span className="text-6xl drop-shadow-[0_0_10px_rgba(125,211,252,0.7)]">{card.icon}</span>
                   </div>
                 </div>
-                <div className="p-6 text-center">
+                <div className="bg-[linear-gradient(180deg,rgba(10,22,68,0.92),rgba(8,12,44,0.95))] p-6 text-center">
                   <h3 className="text-3xl font-semibold leading-tight text-white md:text-4xl">{card.title}</h3>
-                  <p className="mt-2 text-lg leading-relaxed text-slate-300 md:text-xl">{card.desc}</p>
+                  <p className="mt-2 text-lg leading-relaxed text-indigo-100 md:text-xl">{card.desc}</p>
                 </div>
               </Link>
             ))}

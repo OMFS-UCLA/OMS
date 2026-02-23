@@ -2,131 +2,206 @@
 
 import Link from "next/link";
 import { useMemo, useState } from "react";
-import LectureCards from "../components/LectureCards";
 
 const surgeryCards = [
   {
-    topic: "Surgery",
     title: "Preoperative Planning",
-    speaker: "Dr. R. Johnson",
-    duration: "35 min lecture",
+    track: "Fundamental",
+    lessons: 12,
+    progress: 78,
     href: "/surgery",
     image: "/image1_background.png",
   },
   {
-    topic: "Surgery",
-    title: "Mandibular Trauma Principles",
-    speaker: "Dr. K. Ahmed",
-    duration: "51 min lecture",
+    title: "Airway & Anesthesia Basics",
+    track: "Clinical",
+    lessons: 10,
+    progress: 60,
     href: "/surgery",
     image: "/logo2.png",
   },
   {
-    topic: "Surgery",
-    title: "Postoperative Complications",
-    speaker: "Dr. L. Rivera",
-    duration: "44 min lecture",
+    title: "Trauma Surgery Principles",
+    track: "Clinical",
+    lessons: 8,
+    progress: 72,
+    href: "/surgery",
+    image: "/pathology1.png",
+  },
+  {
+    title: "Perioperative Risk Management",
+    track: "Advanced",
+    lessons: 11,
+    progress: 52,
     href: "/surgery",
     image: "/logo_nobackground.png",
+  },
+  {
+    title: "Complication Prevention",
+    track: "Fundamental",
+    lessons: 9,
+    progress: 48,
+    href: "/surgery",
+    image: "/image1_background.png",
+  },
+  {
+    title: "Advanced Sedation Pathways",
+    track: "Advanced",
+    lessons: 7,
+    progress: 44,
+    href: "/surgery",
+    image: "/cellorganelles1.png",
   },
 ];
 
 export default function SurgeryPage() {
-  const [keyword, setKeyword] = useState("");
-  const [selectedTag, setSelectedTag] = useState("");
+  const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
+  const resolveImage = (path) =>
+    path && path.startsWith("/") ? `${basePath}${path}` : path;
 
-  const tags = useMemo(() => surgeryCards.map((card) => card.title), []);
+  const [keyword, setKeyword] = useState("");
+  const [selectedTrack, setSelectedTrack] = useState("All");
+
+  const tracks = ["All", "Fundamental", "Clinical", "Advanced"];
 
   const filteredCards = useMemo(() => {
     const q = keyword.trim().toLowerCase();
     return surgeryCards.filter((card) => {
       const matchesKeyword =
-        !q ||
-        `${card.title} ${card.topic} ${card.speaker} ${card.duration}`
-          .toLowerCase()
-          .includes(q);
-      const matchesTag = !selectedTag || card.title === selectedTag;
-      return matchesKeyword && matchesTag;
+        !q || `${card.title} ${card.track}`.toLowerCase().includes(q);
+      const matchesTrack =
+        selectedTrack === "All" || card.track === selectedTrack;
+      return matchesKeyword && matchesTrack;
     });
-  }, [keyword, selectedTag]);
+  }, [keyword, selectedTrack]);
+
+  const totalLessons = filteredCards.reduce((sum, card) => sum + card.lessons, 0);
+  const avgProgress = filteredCards.length
+    ? Math.round(
+        filteredCards.reduce((sum, card) => sum + card.progress, 0) /
+          filteredCards.length
+      )
+    : 0;
 
   return (
-    <main className="bg-gray-100 pb-16">
+    <main className="min-h-screen bg-[radial-gradient(circle_at_20%_10%,rgba(37,99,235,0.14),transparent_25%),radial-gradient(circle_at_80%_0%,rgba(6,182,212,0.12),transparent_22%),linear-gradient(135deg,#050c2f_0%,#0b2150_45%,#101938_100%)] pb-14">
       <section className="relative overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(88,28,135,0.5),transparent_45%),radial-gradient(circle_at_80%_80%,rgba(59,130,246,0.35),transparent_40%),linear-gradient(120deg,#09052f_0%,#11084a_45%,#1a1f68_100%)]" />
-        <div className="absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.22)_1px,transparent_1px)] bg-[size:9px_9px] opacity-30" />
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,transparent,rgba(59,130,246,0.25)_50%,transparent)] opacity-25" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_15%_20%,rgba(56,189,248,0.12),transparent_28%),radial-gradient(circle_at_85%_15%,rgba(59,130,246,0.14),transparent_30%),linear-gradient(120deg,rgba(2,6,23,0.22),rgba(4,19,58,0.18))]" />
+        <div className="absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)] bg-[size:10px_10px] opacity-25" />
 
-        <div className="relative mx-auto flex max-w-7xl flex-col gap-6 px-6 py-24 text-white md:flex-row md:items-end md:justify-between">
-          <h1 className="text-5xl font-bold tracking-tight md:text-6xl">Surgery</h1>
-          <p className="text-sm font-semibold uppercase tracking-wide text-cyan-200/90">
-            <Link href="/" className="hover:text-white">Home</Link>
+        <div className="relative mx-auto max-w-[1700px] px-6 pb-8 pt-14 text-white xl:px-8">
+          <p className="text-sm font-semibold uppercase tracking-[0.2em] text-cyan-300/90">
+            <Link href="/" className="hover:text-white">
+              Home
+            </Link>
             <span className="mx-2 text-cyan-300">▸</span>
-            <Link href="/training" className="hover:text-white">Lectures</Link>
+            <Link href="/training" className="hover:text-white">
+              Lectures
+            </Link>
             <span className="mx-2 text-cyan-300">▸</span>
-            <span className="text-white">Surgery</span>
+            <span className="text-white">Surgery & Anesthesiology</span>
           </p>
+          <h1 className="mt-4 text-5xl font-bold tracking-tight md:text-6xl">
+            Surgery & Anesthesiology
+          </h1>
+          <p className="mt-3 max-w-3xl text-xl text-slate-200">
+            Learn core operative planning, anesthesia strategy, and perioperative
+            decision-making through structured OMFS modules.
+          </p>
+
+          <div className="mt-8 flex flex-col gap-3 md:flex-row md:items-center">
+            <Link
+              href="/community"
+              className="rounded-xl border border-cyan-300/40 bg-gradient-to-r from-blue-700/85 to-cyan-600/85 px-6 py-3 text-lg font-semibold text-white shadow-lg shadow-cyan-900/20 hover:brightness-110"
+            >
+              + Start New Discussion
+            </Link>
+            <div className="flex max-w-xl flex-1 items-center gap-3 rounded-xl border border-white/20 bg-white/10 px-4 py-3 backdrop-blur">
+              <span className="text-xl">🔎</span>
+              <input
+                type="text"
+                value={keyword}
+                onChange={(e) => setKeyword(e.target.value)}
+                placeholder="Search topics..."
+                className="w-full bg-transparent text-base text-white outline-none placeholder:text-slate-300"
+              />
+            </div>
+          </div>
+
+          <div className="mt-5 flex flex-wrap gap-2">
+            {tracks.map((track) => (
+              <button
+                key={track}
+                type="button"
+                onClick={() => setSelectedTrack(track)}
+                className={`rounded-lg border px-4 py-2 text-sm font-semibold transition ${
+                  selectedTrack === track
+                    ? "border-cyan-300 bg-cyan-500/20 text-white"
+                    : "border-white/20 bg-white/5 text-slate-200 hover:bg-white/10"
+                }`}
+              >
+                {track}
+              </button>
+            ))}
+          </div>
         </div>
       </section>
 
-      <section className="mx-auto -mt-6 max-w-7xl px-4">
-        <div className="rounded-2xl border border-gray-200 bg-gray-100 p-8 shadow-sm md:p-12">
-          <div className="grid gap-10 md:grid-cols-2">
-            <div>
-              <h2 className="text-4xl font-semibold text-gray-900">Overview</h2>
-              <p className="mt-5 max-w-xl text-xl leading-relaxed text-gray-700">
-                Access lecture content focused on surgical planning, operative
-                workflows, decision-making, and advanced principles in oral and
-                maxillofacial surgery.
-              </p>
-            </div>
-
-            <div>
-              <h3 className="text-4xl font-semibold text-gray-900">Find by Topic</h3>
-              <div className="mt-6 space-y-4">
-                <input
-                  type="text"
-                  value={keyword}
-                  onChange={(e) => setKeyword(e.target.value)}
-                  placeholder="Enter your Keyword"
-                  className="w-full rounded-lg border border-gray-300 bg-white px-5 py-4 text-xl text-gray-900 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
-                />
-                <select
-                  value={selectedTag}
-                  onChange={(e) => setSelectedTag(e.target.value)}
-                  className="w-full rounded-lg border border-gray-300 bg-white px-5 py-4 text-xl text-gray-700 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
-                >
-                  <option value="">— Select Tags —</option>
-                  {tags.map((tag) => (
-                    <option key={tag} value={tag}>{tag}</option>
-                  ))}
-                </select>
+      <section className="mx-auto max-w-[1700px] px-6 pt-3 xl:px-8">
+        <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+          {filteredCards.map((card) => (
+            <Link
+              key={card.title}
+              href={card.href}
+              className="group relative min-h-[280px] overflow-hidden rounded-2xl border border-cyan-200/25 bg-[linear-gradient(150deg,rgba(16,30,76,0.55),rgba(8,20,58,0.62))] p-6 shadow-[0_14px_40px_-22px_rgba(8,145,178,0.75)] backdrop-blur transition-all duration-200 hover:-translate-y-1 hover:border-cyan-200/45"
+            >
+              <div
+                className="absolute inset-0 bg-cover bg-center opacity-24 transition group-hover:opacity-32"
+                style={{ backgroundImage: `url('${resolveImage(card.image)}')` }}
+              />
+              <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.05),rgba(255,255,255,0.01))]" />
+              <div className="relative z-10">
+                <div className="flex items-start justify-between gap-3">
+                  <span className="rounded-full border border-cyan-200/30 bg-cyan-300/10 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-cyan-200">
+                    {card.track}
+                  </span>
+                  <span className="text-2xl text-cyan-200/80 transition group-hover:translate-x-1">
+                    ›
+                  </span>
+                </div>
+                <h2 className="mt-5 text-[2rem] font-bold leading-tight text-white">
+                  {card.title}
+                </h2>
+                <p className="mt-5 text-xl text-slate-200">
+                  📘 {card.lessons} Lessons • {card.progress}% Complete
+                </p>
+                <div className="mt-4 h-3 rounded-full bg-slate-900/60">
+                  <div
+                    className="h-full rounded-full bg-gradient-to-r from-cyan-400 to-blue-400"
+                    style={{ width: `${card.progress}%` }}
+                  />
+                </div>
               </div>
-            </div>
-          </div>
-
-          <div className="mt-8 flex flex-wrap gap-3">
-            <Link
-              href="/training"
-              className="rounded-xl bg-gray-900 px-5 py-3 text-sm font-semibold text-white hover:opacity-90"
-            >
-              Back to Lectures
             </Link>
-            <Link
-              href="/basic-sciences"
-              className="rounded-xl border border-gray-300 bg-white px-5 py-3 text-sm font-semibold text-gray-900 hover:bg-gray-50"
-            >
-              Go to Basic Sciences
-            </Link>
-          </div>
+          ))}
         </div>
 
-        <LectureCards
-          eyebrow="Lecture Library"
-          title="Surgical Sciences Lectures"
-          subtitle="Click any card to open a lecture. Replace these sample cards with your own case-based and procedure-specific lecture links."
-          cards={filteredCards}
-        />
+        <div className="mt-6 rounded-2xl border border-cyan-200/25 bg-[linear-gradient(150deg,rgba(16,30,76,0.5),rgba(8,20,58,0.58))] px-6 py-5 text-white shadow-[0_14px_40px_-22px_rgba(8,145,178,0.75)] backdrop-blur">
+          <div className="grid gap-4 text-center md:grid-cols-3">
+            <div>
+              <p className="text-sm uppercase tracking-wide text-cyan-200">Topics</p>
+              <p className="mt-1 text-4xl font-bold">{filteredCards.length}</p>
+            </div>
+            <div>
+              <p className="text-sm uppercase tracking-wide text-cyan-200">Lessons</p>
+              <p className="mt-1 text-4xl font-bold">{totalLessons}+</p>
+            </div>
+            <div>
+              <p className="text-sm uppercase tracking-wide text-cyan-200">Avg Completion</p>
+              <p className="mt-1 text-4xl font-bold">{avgProgress}%</p>
+            </div>
+          </div>
+        </div>
       </section>
     </main>
   );

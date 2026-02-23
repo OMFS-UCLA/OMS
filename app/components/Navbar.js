@@ -11,7 +11,7 @@ const searchItems = [
   { name: "Lectures - Basic Sciences", href: "/basic-sciences", tags: ["lectures", "basic sciences"] },
   { name: "Lectures - Anatomy and Radiology", href: "/anatomy", tags: ["lectures", "anatomy", "radiology"] },
   { name: "Lectures - Surgery and Anesthesiology", href: "/surgery", tags: ["lectures", "surgery", "anesthesiology"] },
-  { name: "Lectures - Pharmacology", href: "/basic-sciences", tags: ["lectures", "pharmacology"] },
+  { name: "Lectures - Pharmacology", href: "/pharmacology", tags: ["lectures", "pharmacology"] },
   { name: "Resources - Digital Toolbox", href: "/resources#toolbox", tags: ["resources", "toolbox"] },
   { name: "Resources - IRB Resources", href: "/resources#irb", tags: ["resources", "irb"] },
   { name: "News", href: "/news", tags: ["news"] },
