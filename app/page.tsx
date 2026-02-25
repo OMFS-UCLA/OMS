@@ -62,79 +62,84 @@ export default function Home() {
   return (
     <main>
       {/* HERO SECTION */}
-      <section className="relative overflow-hidden">
-        <div
-          className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: `url('${basePath}/image1_background.png')` }}
-        />
-        <div className="absolute inset-0 bg-white/75" />
-        <div className="relative z-10 mx-auto max-w-6xl px-4 py-16">
-          <div className="mx-auto max-w-5xl text-center">
-            <div className="flex flex-col items-center gap-6">
-              <h1 className="text-4xl font-bold tracking-tight text-gray-950 sm:text-5xl lg:text-6xl">
-                Learning Platform of Oral and Maxillofacial Surgery
-              </h1>
-              <img
-                src={`${basePath}/logo_nobackground.png`}
-                alt="OMS Academy logo"
-                className="mx-auto h-auto w-[26rem] max-w-[80vw] shrink-0 object-contain sm:w-[30rem] lg:w-[36rem]"
-              />
-            </div>
-            <p className="mt-4 text-xl font-bold text-gray-800 sm:text-2xl">
-              Building a Community Hub for Resounses to learn Basic Sciences and Principles of Surgery.
-            </p>
-
-            <div className="mt-8 flex flex-wrap justify-center gap-3">
+      <section className="border-b border-slate-200 bg-gradient-to-b from-white to-slate-50">
+        <div className="mx-auto max-w-7xl px-4 py-5">
+          <div className="flex flex-wrap items-center justify-between gap-4">
+            <Link href="/" className="flex items-center gap-3 text-slate-900">
+              <img src={`${basePath}/logo2.png`} alt="OMS Academy logo" className="h-8 w-8 rounded-full object-cover" />
+              <span className="text-2xl font-semibold tracking-tight">OMS Academy</span>
+            </Link>
+            <div className="flex flex-wrap items-center gap-6 text-lg text-slate-700">
+              <Link href="/basic-sciences" className="hover:text-slate-900">Curriculum</Link>
+              <Link href="/training" className="hover:text-slate-900">Case Review</Link>
+              <Link href="/resources" className="hover:text-slate-900">Research Hub</Link>
+              <Link href="/community" className="hover:text-slate-900">Community</Link>
               <Link
                 href="/about"
-                className="rounded-xl bg-gray-900 px-5 py-3 text-sm font-semibold text-white hover:opacity-90"
+                className="rounded-xl border border-slate-400 bg-white px-4 py-2 font-medium text-slate-900 transition hover:bg-slate-100"
               >
-                Learn More
-              </Link>
-              <Link
-                href="/news"
-                className="rounded-xl border border-gray-300 bg-white px-5 py-3 text-sm font-semibold text-gray-900 hover:bg-gray-50"
-              >
-                View News
-              </Link>
-              <Link
-                href="/basic-sciences"
-                className="rounded-xl border border-gray-300 bg-white px-5 py-3 text-sm font-semibold text-gray-900 hover:bg-gray-50"
-              >
-                Lectures - Basic Sciences
-              </Link>
-              <Link
-                href="/surgery"
-                className="rounded-xl border border-gray-300 bg-white px-5 py-3 text-sm font-semibold text-gray-900 hover:bg-gray-50"
-              >
-                Lectures - Surgery and Anesthesiology
-              </Link>
-              <Link
-                href="/anatomy"
-                className="rounded-xl border border-gray-300 bg-white px-5 py-3 text-sm font-semibold text-gray-900 hover:bg-gray-50"
-              >
-                Lectures - Anatomy and Radiology
-              </Link>
-              <Link
-                href="/resources"
-                className="rounded-xl border border-gray-300 bg-white px-5 py-3 text-sm font-semibold text-gray-900 hover:bg-gray-50"
-              >
-                Research HUB
-              </Link>
-              <Link
-                href="/pharmacology"
-                className="rounded-xl border border-gray-300 bg-white px-5 py-3 text-sm font-semibold text-gray-900 hover:bg-gray-50"
-              >
-                Lectures - Pharmacology
+                Log In / Join
               </Link>
             </div>
+          </div>
+        </div>
 
-            <div className="mt-8 flex flex-wrap justify-center gap-2 text-sm text-gray-600">
-              <Link className="underline hover:text-gray-900" href="/about">About</Link>
-              <span>•</span>
-              <Link className="underline hover:text-gray-900" href="/resources">Resources</Link>
-              <span>•</span>
-              <Link className="underline hover:text-gray-900" href="/community">Community</Link>
+        <div className="mx-auto max-w-7xl px-4 py-10 md:py-14">
+          <div className="grid items-center gap-8 md:grid-cols-2">
+            <div>
+              <h1 className="text-5xl font-semibold leading-[0.95] tracking-tight text-slate-900 md:text-7xl">
+                The OMS Collaboratory
+              </h1>
+              <p className="mt-6 max-w-xl text-xl leading-snug text-slate-700 md:text-2xl">
+                A centralized evidence-based hub for residents and surgeons. Facilitating clinical mastery through shared inquiry and advanced surgical principles.
+              </p>
+              <div className="mt-8">
+                <Link
+                  href="/basic-sciences"
+                  className="inline-flex rounded-lg bg-blue-800 px-6 py-3 text-xl font-semibold text-white shadow-md transition hover:bg-blue-700"
+                >
+                  [Enter the Curriculum]
+                </Link>
+              </div>
+            </div>
+
+            <div className="justify-self-end">
+              <div className="overflow-hidden rounded-sm border border-slate-200 bg-slate-100 shadow-sm">
+                <img
+                  src={`${basePath}/boneimage1.png`}
+                  alt="OMS visual"
+                  className="h-[360px] w-[520px] max-w-full object-cover"
+                />
+              </div>
+            </div>
+          </div>
+
+          <div className="mt-10 overflow-hidden rounded-xl border border-slate-300 bg-white shadow-sm">
+            <div className="border-b border-slate-200 p-3">
+              <div className="rounded-lg border border-slate-300 px-4 py-2 text-slate-500">Search</div>
+            </div>
+            <div className="grid md:grid-cols-3">
+              <div className="border-b border-slate-200 p-6 md:border-b-0 md:border-r">
+                <h3 className="text-4xl font-medium text-slate-900">Clinical Lectures</h3>
+                <p className="mt-3 text-2xl text-slate-700">Latest: Maxillofacial Trauma Management</p>
+                <Link href="/basic-sciences" className="mt-6 inline-block text-2xl text-slate-800 hover:text-slate-950">
+                  [Browse All Modules]
+                </Link>
+              </div>
+              <div className="border-b border-slate-200 p-6 md:border-b-0 md:border-r">
+                <h3 className="text-4xl font-medium text-slate-900">Research &amp; Trials</h3>
+                <p className="mt-3 text-2xl text-slate-700">New Upload: Bone Grafting Meta-Analysis</p>
+                <Link href="/resources" className="mt-6 inline-block text-2xl text-slate-800 hover:text-slate-950">
+                  [Access Library]
+                </Link>
+              </div>
+              <div className="p-6">
+                <h3 className="text-4xl font-medium text-slate-900">Peer Discussion</h3>
+                <p className="mt-3 text-2xl text-slate-700">Active: Management of Third Molar Complications</p>
+                <Link href="/community" className="mt-6 inline-block text-2xl text-slate-800 hover:text-slate-950">
+                  [Join Conversation]
+                </Link>
+              </div>
             </div>
           </div>
         </div>
