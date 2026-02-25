@@ -70,7 +70,7 @@ export default function Home() {
           <div className="grid items-center gap-8 md:grid-cols-2">
             <div>
               <h1 className="text-5xl font-semibold leading-[0.95] tracking-tight text-slate-900 md:text-7xl">
-                The OMS Collaboratory
+                OMS Nexus
               </h1>
               <p className="mt-6 max-w-xl text-xl leading-snug text-slate-700 md:text-2xl">
                 A centralized evidence-based hub for residents and surgeons. Facilitating clinical mastery through shared inquiry and advanced surgical principles.
@@ -80,7 +80,7 @@ export default function Home() {
                   href="/basic-sciences"
                   className="inline-flex rounded-lg bg-blue-800 px-6 py-3 text-xl font-semibold text-white shadow-md transition hover:bg-blue-700"
                 >
-                  [Enter the Curriculum]
+                  Enter the Curriculum
                 </Link>
               </div>
             </div>
@@ -90,7 +90,7 @@ export default function Home() {
                 <img
                   src={heroImageSrc}
                   alt="OMS visual"
-                  className="h-[360px] w-[520px] max-w-full object-cover"
+                  className="h-auto w-[520px] max-w-full object-contain"
                   onError={() => setHeroImageSrc("/homepage.png")}
                 />
               </div>
