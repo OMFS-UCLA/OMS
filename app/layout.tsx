@@ -16,8 +16,8 @@ const geistMono = Geist_Mono({
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
 
 export const metadata: Metadata = {
-  title: "OMS Academy",
-  description: "OMS Academy",
+  title: "OMS Nexus",
+  description: "OMS Nexus",
   icons: {
     icon: `${basePath}/logo2.png`,
     shortcut: `${basePath}/logo2.png`,

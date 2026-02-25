@@ -3,7 +3,7 @@ export default function Footer() {
     <footer className="mt-16 border-t border-gray-200 bg-white">
       <div className="mx-auto grid max-w-6xl gap-8 px-4 py-10 md:grid-cols-3">
         <div>
-          <h3 className="font-semibold">OMS Academy</h3>
+          <h3 className="font-semibold">OMS Nexus</h3>
           <p className="mt-2 text-sm text-gray-600">
             A virtual forum where technologists, researchers, and clinicians connect, learn,
             share, and innovate.
@@ -28,7 +28,7 @@ export default function Footer() {
       </div>
 
       <div className="border-t border-gray-200 py-4 text-center text-xs text-gray-500">
-        © {new Date().getFullYear()} OMS Academy
+        © {new Date().getFullYear()} OMS Nexus
       </div>
     </footer>
   );

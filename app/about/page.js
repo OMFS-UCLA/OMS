@@ -4,7 +4,7 @@ export default function AboutPage() {
       <section className="border-b border-slate-200 bg-white">
         <div className="mx-auto max-w-6xl px-4 py-12">
           <p className="text-sm font-semibold uppercase tracking-[0.18em] text-blue-700">
-            OMS Academy
+            OMS Nexus
           </p>
           <h1 className="mt-3 text-4xl font-bold tracking-tight text-slate-900 md:text-5xl">
             About Our Learning Hub

@@ -110,7 +110,7 @@ export default function Navbar() {
             className="h-14 w-14 rounded-full object-cover"
           />
           <span className="text-3xl font-semibold text-gray-800">
-            OMS Academy
+            OMS Nexus
           </span>
         </Link>
 

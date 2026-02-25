@@ -1,5 +1,6 @@
 "use client";
 import Link from "next/link";
+import { useState } from "react";
 
 type NewsItem = {
   category: string;
@@ -59,6 +60,8 @@ const newsItems: NewsItem[] = [
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
 
 export default function Home() {
+  const [heroImageSrc, setHeroImageSrc] = useState(`${basePath}/homepage.png`);
+
   return (
     <main>
       {/* HERO SECTION */}
@@ -85,9 +88,10 @@ export default function Home() {
             <div className="justify-self-end">
               <div className="overflow-hidden rounded-sm border border-slate-200 bg-slate-100 shadow-sm">
                 <img
-                  src={`${basePath}/homepage.png?v=1`}
+                  src={heroImageSrc}
                   alt="OMS visual"
                   className="h-[360px] w-[520px] max-w-full object-cover"
+                  onError={() => setHeroImageSrc("/homepage.png")}
                 />
               </div>
             </div>
