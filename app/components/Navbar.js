@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 const searchItems = [
   { name: "Home", href: "/", tags: ["home"] },
@@ -63,8 +63,11 @@ function Dropdown({ label, items, href }) {
 export default function Navbar() {
   const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
   const pathname = usePathname();
+  const router = useRouter();
   const [searchOpen, setSearchOpen] = useState(false);
   const [query, setQuery] = useState("");
+  const [authUser, setAuthUser] = useState(null);
+  const [authLoading, setAuthLoading] = useState(true);
   const hasQuery = query.trim().length > 0;
 
   const filteredItems = useMemo(() => {
@@ -97,6 +100,34 @@ export default function Navbar() {
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
   }, []);
+
+  useEffect(() => {
+    let active = true;
+    async function loadSession() {
+      try {
+        const res = await fetch("/api/auth/session", { cache: "no-store" });
+        const data = await res.json();
+        if (active) {
+          setAuthUser(data.user || null);
+        }
+      } catch {
+        if (active) setAuthUser(null);
+      } finally {
+        if (active) setAuthLoading(false);
+      }
+    }
+    loadSession();
+    return () => {
+      active = false;
+    };
+  }, [pathname]);
+
+  async function handleLogout() {
+    await fetch("/api/auth/logout", { method: "POST" });
+    setAuthUser(null);
+    router.push("/");
+    router.refresh();
+  }
 
   return (
     <header className="sticky top-0 z-40 border-b border-gray-200 bg-gray-100">
@@ -169,6 +200,39 @@ export default function Navbar() {
 
         {/* RIGHT — ICONS */}
         <div className="flex items-center gap-5 text-gray-700">
+          {!authLoading && !authUser && (
+            <>
+              <Link
+                href="/login"
+                className="hidden rounded-md border border-gray-300 bg-white px-3 py-1.5 text-sm font-medium text-gray-700 hover:bg-gray-50 md:inline-block"
+              >
+                Log In
+              </Link>
+              <Link
+                href="/signup"
+                className="hidden rounded-md bg-blue-700 px-3 py-1.5 text-sm font-medium text-white hover:bg-blue-600 md:inline-block"
+              >
+                Sign Up
+              </Link>
+            </>
+          )}
+          {!authLoading && authUser && (
+            <>
+              <Link
+                href="/account"
+                className="hidden rounded-md border border-gray-300 bg-white px-3 py-1.5 text-sm font-medium text-gray-700 hover:bg-gray-50 md:inline-block"
+              >
+                Account
+              </Link>
+              <button
+                type="button"
+                onClick={handleLogout}
+                className="hidden rounded-md bg-slate-900 px-3 py-1.5 text-sm font-medium text-white hover:bg-slate-800 md:inline-block"
+              >
+                Log Out
+              </button>
+            </>
+          )}
           <button
             type="button"
             className={`text-2xl transition-all duration-200 hover:scale-110 hover:text-black active:scale-95 ${
