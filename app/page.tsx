@@ -10,44 +10,79 @@ type NewsItem = {
 
 type HubCard = {
   title: string;
-  desc: string;
+  level: string;
+  lessons: number;
+  completed: number;
+  progress: number;
   href: string;
-  imageClass: string;
-  icon: string;
+  image: string;
 };
+
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
 
 const hubCards: HubCard[] = [
   {
-    title: "Lectures",
-    desc: "Interactive lectures and tutorials",
-    href: "/training",
-    imageClass:
-      "bg-[radial-gradient(circle_at_25%_18%,rgba(56,189,248,0.45),transparent_35%),linear-gradient(155deg,#09122f_0%,#1f2f82_100%)]",
-    icon: "▶️",
+    title: "Cell Biology",
+    level: "Fundamental",
+    lessons: 12,
+    completed: 10,
+    progress: 80,
+    href: "/basic-sciences/cell-biology",
+    image: `${basePath}/cellbio1.png`,
   },
   {
-    title: "Research HUB",
-    desc: "Tools, datasets, and publishing",
-    href: "/resources",
-    imageClass:
-      "bg-[radial-gradient(circle_at_70%_20%,rgba(192,132,252,0.45),transparent_35%),linear-gradient(155deg,#261b63_0%,#5f2ca8_100%)]",
-    icon: "🧪",
+    title: "Immunology",
+    level: "Clinical",
+    lessons: 10,
+    completed: 6,
+    progress: 60,
+    href: "/basic-sciences/immunology",
+    image: `${basePath}/immuno1.png`,
   },
   {
-    title: "Community",
-    desc: "Forums and collaboration",
-    href: "/community",
-    imageClass:
-      "bg-[radial-gradient(circle_at_30%_25%,rgba(56,189,248,0.45),transparent_35%),linear-gradient(155deg,#0f2552_0%,#1f4da5_100%)]",
-    icon: "👥",
+    title: "Pathology",
+    level: "Clinical",
+    lessons: 8,
+    completed: 6,
+    progress: 70,
+    href: "/basic-sciences/pathology",
+    image: `${basePath}/pathology1.png`,
   },
   {
-    title: "News",
-    desc: "Latest insights and updates",
-    href: "/news",
-    imageClass:
-      "bg-[radial-gradient(circle_at_80%_18%,rgba(125,211,252,0.45),transparent_35%),linear-gradient(155deg,#1a2757_0%,#3967b8_100%)]",
-    icon: "📰",
+    title: "Hematology-Oncology",
+    level: "Advanced",
+    lessons: 11,
+    completed: 6,
+    progress: 55,
+    href: "/basic-sciences/pathology",
+    image: `${basePath}/logo_nobackground.png`,
+  },
+  {
+    title: "Inflammation and Healing",
+    level: "Clinical",
+    lessons: 9,
+    completed: 5,
+    progress: 50,
+    href: "/basic-sciences/pathology/inflammation-and-healing",
+    image: `${basePath}/homepage.png`,
+  },
+  {
+    title: "Microbiology",
+    level: "Fundamental",
+    lessons: 7,
+    completed: 3,
+    progress: 45,
+    href: "/basic-sciences",
+    image: `${basePath}/image1_background.png`,
+  },
+  {
+    title: "Microbiology Essentials",
+    level: "Advanced",
+    lessons: 10,
+    completed: 6,
+    progress: 65,
+    href: "/basic-sciences",
+    image: `${basePath}/image1_background.png`,
   },
 ];
 
@@ -56,8 +91,6 @@ const newsItems: NewsItem[] = [
   { category: "Events", title: "Coming Soon!", href: "/news#jobs" },
   { category: "News of Interest", title: "New Report: Coming Soon!", href: "/news" },
 ];
-
-const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
 
 export default function Home() {
   const [heroImageSrc, setHeroImageSrc] = useState(`${basePath}/homepage.png`);
@@ -130,35 +163,102 @@ export default function Home() {
 
       {/* HUB RESOURCES */}
       <section className="px-4 py-14">
-        <div className="mx-auto max-w-7xl overflow-hidden rounded-[2rem] border border-indigo-300/30 bg-[radial-gradient(circle_at_16%_18%,rgba(56,189,248,0.28),transparent_34%),radial-gradient(circle_at_83%_20%,rgba(244,114,182,0.26),transparent_36%),linear-gradient(145deg,#040a2e_0%,#151a54_40%,#180e3f_100%)] p-8 shadow-[0_30px_90px_-35px_rgba(59,130,246,0.8)] md:p-12">
-          <div className="mx-auto h-px max-w-6xl bg-gradient-to-r from-transparent via-blue-200/40 to-transparent" />
-          <h2 className="mt-6 text-center text-4xl font-bold leading-tight text-white md:text-6xl md:whitespace-nowrap">
-            OMFS - ALL IN ONE PLACE
+        <div className="mx-auto max-w-7xl overflow-hidden rounded-[2rem] border border-cyan-200/20 bg-[radial-gradient(circle_at_20%_0%,rgba(56,189,248,0.18),transparent_34%),radial-gradient(circle_at_85%_15%,rgba(14,165,233,0.18),transparent_42%),linear-gradient(145deg,#02153f_0%,#062d6f_50%,#041a4e_100%)] p-7 shadow-[0_25px_80px_-30px_rgba(14,165,233,0.65)] md:p-10">
+          <p className="text-center text-xs font-semibold uppercase tracking-[0.2em] text-cyan-200/70">
+            Home / Lectures / Basic Sciences
+          </p>
+          <h2 className="mt-2 text-center text-4xl font-bold leading-tight text-white md:text-6xl">
+            Basic Sciences
           </h2>
-          <p className="mx-auto mt-4 max-w-3xl text-center text-lg leading-relaxed text-indigo-100 md:text-xl">
-            A unified platform for lectures, research tools, community collaboration,
-            and specialty updates.
+          <p className="mx-auto mt-3 max-w-3xl text-center text-lg leading-relaxed text-blue-100">
+            Build your foundation with structured topics, chapter progression, and high-yield modules for OMFS training.
           </p>
 
-          <div className="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
+          <div className="mt-7 flex flex-wrap items-center justify-center gap-3">
+            <button className="rounded-xl bg-gradient-to-r from-blue-500 to-cyan-400 px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-cyan-500/20">
+              + Start New Discussion
+            </button>
+            <button className="rounded-xl border border-cyan-200/30 bg-white/10 px-5 py-2.5 text-sm font-medium text-cyan-50 backdrop-blur">
+              Systems &amp; Conditions
+            </button>
+            <button className="rounded-xl border border-cyan-200/30 bg-white/10 px-5 py-2.5 text-sm font-medium text-cyan-50 backdrop-blur">
+              Clinical Application
+            </button>
+          </div>
+
+          <div className="mt-4 flex flex-wrap items-center justify-center gap-2">
+            {["All", "Fundamental", "Clinical", "Advanced"].map((chip) => (
+              <span
+                key={chip}
+                className="rounded-lg border border-cyan-200/30 bg-white/10 px-3 py-1 text-xs font-semibold text-cyan-100"
+              >
+                {chip}
+              </span>
+            ))}
+          </div>
+
+          <div className="mt-8 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
             {hubCards.map((card) => (
               <Link
                 key={card.title}
                 href={card.href}
-                className="group overflow-hidden rounded-[1.8rem] border border-blue-200/35 bg-white/5 backdrop-blur-xl transition-all duration-200 hover:-translate-y-1.5 hover:shadow-[0_20px_50px_-20px_rgba(125,211,252,0.85)]"
+                className="group relative overflow-hidden rounded-2xl border border-cyan-200/25 bg-white/5 p-4 backdrop-blur-md transition-all duration-200 hover:-translate-y-1 hover:border-cyan-200/45 hover:shadow-[0_20px_40px_-20px_rgba(56,189,248,0.7)]"
               >
-                <div className={`relative flex h-52 items-center justify-center border-b border-blue-200/30 ${card.imageClass}`}>
-                  <div className="absolute inset-x-0 bottom-0 h-10 bg-gradient-to-t from-fuchsia-400/25 to-transparent" />
-                  <div className="flex h-24 w-24 items-center justify-center rounded-3xl border border-white/45 bg-white/10 shadow-[inset_0_0_22px_rgba(191,219,254,0.35)]">
-                    <span className="text-6xl drop-shadow-[0_0_10px_rgba(125,211,252,0.7)]">{card.icon}</span>
+                <div
+                  className="absolute inset-0 bg-cover bg-center opacity-35 transition-opacity duration-200 group-hover:opacity-45"
+                  style={{ backgroundImage: `url('${card.image}')` }}
+                />
+                <div className="absolute inset-0 bg-gradient-to-b from-blue-900/10 via-blue-950/40 to-blue-950/90" />
+                <div className="relative z-10">
+                  <div className="flex items-start justify-between gap-3">
+                    <span className="rounded-full border border-cyan-200/40 bg-cyan-300/15 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-cyan-100">
+                      {card.level}
+                    </span>
+                    <div
+                      className="flex h-12 w-12 items-center justify-center rounded-full text-sm font-semibold text-cyan-50"
+                      style={{
+                        background: `conic-gradient(#84cc16 ${card.progress}%, rgba(255,255,255,0.14) ${card.progress}% 100%)`,
+                      }}
+                    >
+                      <div className="flex h-9 w-9 items-center justify-center rounded-full bg-[#0d2b64]">{card.progress}%</div>
+                    </div>
                   </div>
-                </div>
-                <div className="bg-[linear-gradient(180deg,rgba(10,22,68,0.92),rgba(8,12,44,0.95))] p-6 text-center">
-                  <h3 className="text-3xl font-semibold leading-tight text-white md:text-4xl">{card.title}</h3>
-                  <p className="mt-2 text-lg leading-relaxed text-indigo-100 md:text-xl">{card.desc}</p>
+                  <h3 className="mt-5 text-4xl font-semibold leading-tight text-white md:text-[2rem]">{card.title}</h3>
+                  <p className="mt-2 text-lg text-cyan-100/90">
+                    {card.lessons} lessons • {card.progress}% complete
+                  </p>
+                  <div className="mt-4 h-2.5 overflow-hidden rounded-full bg-blue-950/80">
+                    <div
+                      className="h-full rounded-full bg-gradient-to-r from-cyan-400 to-lime-300"
+                      style={{ width: `${card.progress}%` }}
+                    />
+                  </div>
+                  <p className="mt-3 text-base text-cyan-100/90">
+                    {card.completed}/{card.lessons} lessons
+                  </p>
                 </div>
               </Link>
             ))}
+          </div>
+
+          <div className="mt-8 rounded-2xl border border-cyan-200/25 bg-white/10 px-4 py-4 backdrop-blur md:px-8">
+            <div className="grid gap-4 text-center text-cyan-100 md:grid-cols-3">
+              <div>
+                <p className="text-xs uppercase tracking-[0.16em] text-cyan-200/80">Units Completed</p>
+                <p className="mt-1 text-4xl font-semibold">7</p>
+              </div>
+              <div className="md:border-x md:border-cyan-200/25">
+                <p className="text-xs uppercase tracking-[0.16em] text-cyan-200/80">Total Lessons</p>
+                <p className="mt-1 text-4xl font-semibold">67+</p>
+              </div>
+              <div>
+                <p className="text-xs uppercase tracking-[0.16em] text-cyan-200/80">Overall Progress</p>
+                <p className="mt-1 text-4xl font-semibold">61%</p>
+              </div>
+            </div>
+            <div className="mt-4 h-3 overflow-hidden rounded-full bg-blue-950/80">
+              <div className="h-full w-[61%] rounded-full bg-gradient-to-r from-cyan-400 to-lime-300" />
+            </div>
           </div>
         </div>
       </section>
